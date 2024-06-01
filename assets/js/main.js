@@ -121,3 +121,26 @@
 				});
 
 })(jQuery);
+
+$(document).ready(function()
+{
+    var name = "I'm currently interested in: Computer Vision, GPU Programming, and Computer Hardware Design.";
+    // Call the function to begin the typing process
+    typeName(name, 0);
+});
+
+function typeName(name, iteration) {
+	// Prevent our code executing if there are no letters left
+	if (iteration === name.length)
+	
+		return;
+	
+	setTimeout(function() {
+		// Set the name to the current text + the next character
+		// whilst incrementing the iteration variable
+		$('#typeDesc').text( $('#typeDesc').text() + name[iteration++] );
+		
+		// Re-trigger our function
+		typeName(name, iteration);
+	}, 50);
+}
