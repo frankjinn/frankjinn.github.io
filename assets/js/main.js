@@ -144,3 +144,10 @@ function typeName(name, iteration) {
 		typeName(name, iteration);
 	}, 50);
 }
+function copyEmail() {
+	navigator.clipboard.writeText('frank.jin.01+contact@googlemail.com').then(function () {
+		alert('Email copied to clipboard.')
+	}, function () {
+		alert('Failure to copy. Check permissions for clipboard')
+	});
+}
