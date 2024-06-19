@@ -56,7 +56,7 @@
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm <strong>Frank</strong>, a software engineer studying at UC Berkeley.</h2>
+								<h2 class="alt">Hi! I'm <strong>Frank</strong>, a student at UC Berkeley studying software and electrical engineering.</h2>
 								<p id="typeDesc" style="max-width: 20em; margin-left: auto; margin-right: auto;"></p>
 							</header>
 
@@ -80,7 +80,13 @@
 								The info is then relayed to a bacelet of an array of haptic motors which guide the user towards the correct direction.
 							</p>
 
-							<div class="row">
+							<article class="item">
+								<img src="images/pic02.jpg" alt="" />
+								<header>
+									<h3>To Be Displayed!</h3>
+								</header>
+							</article>
+							<!-- <div class="row">
 								<div class="col-4 col-12-mobile">
 									<article class="item">
 										<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
@@ -123,7 +129,7 @@
 										</header>
 									</article>
 								</div>
-							</div>
+							</div> -->
 
 							<br>
 							<h3>CUDA Mini-Projects</h3>
@@ -151,9 +157,9 @@
 										</header>
 									</article>
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+										<a href="#" class="image fit"><img src="images/CUDAImages/heatTransfer.gif" alt="" /></a>
 										<header>
-											<h3>Natoque Vitae</h3>
+											<h3>Naive Heat Transfer Simulation</h3>
 										</header>
 									</article>
 								</div>
@@ -161,13 +167,13 @@
 									<article class="item">
 										<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
 										<header>
-											<h3>Dolor Penatibus</h3>
+											<h3>GPU Accelerated Add</h3>
 										</header>
 									</article>
 									<article class="item">
 										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
 										<header>
-											<h3>Orci Convallis</h3>
+											<h3>GPU Accelerated Dot</h3>
 										</header>
 									</article>
 								</div>
@@ -189,49 +195,74 @@
 							<h3>KwikKart</h3>
 							<p>
 								ML Engineer (May 2024 - Current) <br> 
-								Self-checkout shopping cart integration, using computer vision models to prevent theft.
+								Self-checkout shopping cart integration, using computer vision models to prevent theft. Worked on improving model accuracy in theft detection.
+								Below are some examples of what the CV model that my team and I worked on.
 							</p>
-
 							<div class="row">
 								<div class="col-4 col-12-mobile">
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+										<a href="#" class="image fit">
+											<video class="image fit" autoplay muted loop>
+												<source src="images/KwikKart/CameraCover_output_mjpg12_FPS20.webm" type="video/webm">
+										  			Your browser does not support the video tag.
+										  	</video>
+										</a>
 										<header>
-											<h3>Ipsum Feugiat</h3>
+											<h3>Covered Camera</h3>
 										</header>
 									</article>
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
+											<source src="images/KwikKart/MultipleItems-NoScan_output_mjpg268_FPS20.webm" type="video/webm">
+												  Your browser does not support the video tag.
+										  </video>
+										</a>
 										<header>
-											<h3>Rhoncus Semper</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-										<header>
-											<h3>Magna Nullam</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-										<header>
-											<h3>Natoque Vitae</h3>
+											<h3>Multiple Items No Scan</h3>
 										</header>
 									</article>
 								</div>
 								<div class="col-4 col-12-mobile">
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
+											<source src="images/KwikKart/NoScan_output_mjpg2_FPS20.webm" type="video/webm">
+												  Your browser does not support the video tag.
+										  </video>
+										</a>
 										<header>
-											<h3>Dolor Penatibus</h3>
+											<h3>No Scan</h3>
 										</header>
 									</article>
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
+											<source src="images/KwikKart/Scanned_output_mjpg2_FPS20.webm" type="video/webm">
+												  Your browser does not support the video tag.
+										  </video>
+										</a>
 										<header>
-											<h3>Orci Convallis</h3>
+											<h3>Scanned Item (Normal)</h3>
+										</header>
+									</article>
+								</div>
+								<div class="col-4 col-12-mobile">
+									<article class="item">
+										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
+											<source src="images/KwikKart/ScanOneEnterAnother_output_mjpg94_FPS20.webm" type="video/webm">
+												  Your browser does not support the video tag.
+										  </video>
+										</a>
+										<header>
+											<h3>Scan One, Enter Another</h3>
+										</header>
+									</article>
+									<article class="item">
+										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
+											<source src="images/KwikKart/Suspicious_output_mjpg188_FPS20.webm" type="video/webm">
+												  Your browser does not support the video tag.
+										  </video>
+										</a>
+										<header>
+											<h3>Suspicious Output</h3>
 										</header>
 									</article>
 								</div>
