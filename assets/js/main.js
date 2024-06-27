@@ -132,7 +132,6 @@ $(document).ready(function()
 function typeName(name, iteration) {
 	// Prevent our code executing if there are no letters left
 	if (iteration === name.length)
-	
 		return;
 	
 	setTimeout(function() {
@@ -142,7 +141,7 @@ function typeName(name, iteration) {
 		
 		// Re-trigger our function
 		typeName(name, iteration);
-	}, 50);
+	}, 30);
 }
 function copyEmail() {
 	navigator.clipboard.writeText('frank.jin.01+contact@googlemail.com').then(function () {
