@@ -1772,8 +1772,26 @@ input, select, textarea {
 
 		.image.featured {
 			display: block;
-			max-width:50vw;
+			aspect-ratio: 1.6 / 1;
+			max-height: 40vh;
+			max-width: 80vw;
 			margin: 0 0 2em 0;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		.image.large {
+			display: block;
+			max-height: 40%;
+			max-width: 50%; 
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		.text.large {
+			display: block;
+			max-height: 40%;
+			max-width: 50%; 
 			margin-left: auto;
 			margin-right: auto;
 		}
