@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Frank Jin</title>
-		<link rel="icon" type="image/x-icon" href="images/icon.ico">
+		<link rel="icon" type="image/x-icon" href="indexImages/icon.ico">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="desciption" content="Project examples from Berkeley's CS180" />
@@ -17,7 +17,7 @@
 				<div class="top">
 					<!-- Logo -->
 						<!-- <div id="logo">
-							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+							<span class="image avatar48"><img src="indexImages/avatar.jpg" alt="" /></span>
 							<h1 id="title">Frank Jin</h1>
 							<p>Software Engineer</p>
 						</div> -->
@@ -49,311 +49,80 @@
 
 		<!-- Main -->
 			<div id="main">
-
-				<!-- Intro -->
-					<!-- <section id="top" class="one dark cover">
-						<div class="container">
-
-							<header>
-								<h2 class="alt">Hi! I'm <strong>Frank Jin</strong>, a student at UC Berkeley studying software and electrical engineering.</h2>
-								<p id="typeDesc" style="max-width: 20em; margin-left: auto; margin-right: auto;"></p>
-							</header>
-
-							<footer>
-								<a href="#portfolio" class="button scrolly">Portfolio</a>
-							</footer>
-
-						</div>
-					</section> -->
-
 				<!-- Projects -->
 					<section id="project1" class="two">
 						<div class="container">
 							<header>
-								<h2>Project 1: Colorizing the Gorskii collection</h2>
+								<h2>Project 1</h2>
 							</header>
 
-							<h3>Haptic Sidewalk Navigator Using Semantic Segmentation 
+							<h3>Colorizing the Gorskii collection 
 								<!-- <a href="https://github.com/frankjinn/HapticVision" target="_blank"> Repository Link</a> -->
 							</h3>
-							<p>This an ongoing project that attempts to create a sidewalk navagation haptic device using semantic segmentation.
-								The device will identify the borders of the sidewalk using a camera and a miniature computer running a semantic segmentation model.
-								The info is then relayed to a bacelet of an array of haptic motors which guide the user towards the correct direction.
-							</p>
 							<p>
-								Current Update (July 3, 2024): Finished demo of haptic interface for distance detection, finished polygonal approximation of labeled
-								training images.
+								In this project, I attempted to colourize the digitized Gorskii collection. The collection contains many images, each made up frome a set of 3 greyscale images.
+								These greyscale images represent the images captured by Gorskii, where each greyscale image is a negative of blue, green, red components of the entire
+								coloured image. In this project, I attempt to do 3 things, crop out the edges of the scanned collection, allign each colour to create a final coloured image, and finally,
+								enhance the image as much as possible.
 							</p>
 
 							<article class="item">
-								<a href="#" class="image large" style="aspect-ratio: 2.55/1; max-width: 70%;"><img src="images/HapticVisionImages/Polygon_screenshot_03.07.2024.png" alt="" /></a>
-								<header class="text large" style="max-width: 70%;">
-									Polygonal Approximation of Car Instance Area
-								</header>
+								<div class="row">
+									<div class="col-4 col-12-mobile">
+										<article class="item">
+											<a href="#" class="image fit"><img src="CS180Images/cathedral.jpg" alt="" /></a>
+											<header>
+												<h3>Original Cathedral Image</h3>
+											</header>
+										</article>
+									</div>
+									<div class="col-4 col-12-mobile">
+										<article class="item">
+											<a href="#" class="image fit"><img src="CS180Images/monastery.jpg" alt="" /></a>
+											<header>
+												<h3>Original Monastery Image</h3>
+											</header>
+										</article>
+									</div>
+									<div class="col-4 col-12-mobile">
+										<article class="item">
+											<a href="#" class="image fit"><img src="CS180Images/tobolsk.jpg" alt="" /></a>
+											<header>
+												<h3>Original Tobolsk Image</h3>
+											</header>
+										</article>
+									</div>
+								</div>	
 							</article>
-							<!-- <div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-										<header>
-											<h3>Ipsum Feugiat</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-										<header>
-											<h3>Rhoncus Semper</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-										<header>
-											<h3>Magna Nullam</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-										<header>
-											<h3>Natoque Vitae</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-										<header>
-											<h3>Dolor Penatibus</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-										<header>
-											<h3>Orci Convallis</h3>
-										</header>
-									</article>
-								</div>
-							</div> -->
-
 							<br>
-							<h3>CUDA Mini-Projects</h3>
-							<p>A collection of small projects written using CUDA C/C++, with guidance from "CUDA by Example" textbook.</p>
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/CUDAImages/juliaSet.png" alt="" /></a>
-										<header>
-											<h3>GPU Accelerated Julia Set</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/CUDAImages/rayTrace.png" alt="" /></a>
-										<header>
-											<h3>Ray Tracing Randomly Generated Spheres</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/CUDAImages/ripple.gif" alt="" /></a>
-										<header>
-											<h3>Ripple Animation Using 2-Dimensional Multi-Threading</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/CUDAImages/heatTransfer.gif" alt="" /></a>
-										<header>
-											<h3>Naive Heat Transfer Simulation</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-										<header>
-											<h3>GPU Accelerated Add</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-										<header>
-											<h3>GPU Accelerated Dot</h3>
-										</header>
-									</article>
-								</div>
-							</div>
-
-						</div>
-					</section>
-
-					<!-- Work -->
-					<section id="project2" class="two">
-						<div class="container">
-							<header>
-								<h2>Work Samples</h2>
-								<p>
-									Some visual examples of previous work I have done.
-								</p>
-							</header>
-
-							<h3>KwikKart</h3>
+							<h2>The Core Process</h2>
 							<p>
-								ML Engineer (May 2024 - Current) <br> 
-								Self-checkout shopping cart integration, using computer vision models to prevent theft. Worked on improving model accuracy in theft detection.
-								Below are some examples of what the CV model that my team and I worked on.
+								The first step in the process was to crop the edges. I first seperated the images into thirds, then cropped 5% of the image off each edge.
+								This resulted in an image without the black and white borders.
 							</p>
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit">
-											<video class="image fit" autoplay muted loop>
-												<source src="images/KwikKart/CameraCover_output_mjpg12_FPS20.webm" type="video/webm">
-										  			Your browser does not support the video tag.
-										  	</video>
-										</a>
-										<header>
-											<h3>Covered Camera</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="images/KwikKart/MultipleItems-NoScan_output_mjpg268_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Multiple Items No Scan</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="images/KwikKart/NoScan_output_mjpg2_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>No Scan</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="images/KwikKart/Scanned_output_mjpg2_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Scanned Item (Normal)</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="images/KwikKart/ScanOneEnterAnother_output_mjpg94_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Scan One, Enter Another</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="images/KwikKart/Suspicious_output_mjpg188_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Suspicious Output</h3>
-										</header>
-									</article>
-								</div>
-							</div>
 
 							<br>
-							<h3>Rimble</h3>
-							<p> ML and Data Engineering Consultant (May 2023 - June 2024) <br> 
-								Esport player statistics and game win result predictions. The following are a few examples of the results after model
-								improvments made by me (here we are predicting on CS2 data). Achieved an average of 25% decrease in MSE.
+							<p>
+								The second step was to allign these images together. This was the hardest part as I needed to find an effecient way to align large images without
+								using a overly computationaly intensive algorithm. The original method was to use the sum of the normalized cross correlation of two pictures (a higher score is better)
+								to calculate how closely the two images aligned. This method worked for smaller jpg images, however, for larger tif images, a better method was needed. For example, a 10 
+								pixle horizontal and vertical shift would create 100 calculations, with some image sizes being up to about 4000x4000 pixles in dimension. Therefor, an image pyramid was used,
+								to scale down the resolution of the images and calculate the alignment, then having a reasonable guess on the horizontal and verticle shifts, the image would then be scaled up,
+								and the guess would be refined. This method called an "image pyramid" dramatically reduced the time it took to align the images.
 							</p>
-							<article class="item">
-								<a href="#" class="image large"><img src="images/Rimble/PCACount.png" alt="" /></a>
-								<header class="text large">
-									<h3>Feature Selection Using PCA Components</h3>
-								</header>
-							</article>
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/Rimble/killsNew.png" alt="" /></a>
-										<header>
-											<h3>New Model's Kills Error Curve</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/Rimble/killsPrev.png" alt="" /></a>
-										<header>
-											<h3>Previous Model's Kills Error Curve</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/Rimble/adrNew.png" alt="" /></a>
-										<header>
-											<h3>New Model's Deaths Error Curve</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/Rimble/adrPrev.png" alt="" /></a>
-										<header>
-											<h3>Previous Model's Death Error Curve</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/Rimble/kastNew.png" alt="" /></a>
-										<header>
-											<h3>New Model's KAST Error Curve</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/Rimble/kastPrev.png" alt="" /></a>
-										<header>
-											<h3>Previous Model's KAST Error Curve</h3>
-										</header>
-									</article>
-								</div>
-							</div>
-
-						</div>
-					</section>
-				<!-- About Me -->
-					<section id="about" class="three">
-						<div class="container">
-
-							<header>
-								<h2>About Me</h2>
-							</header>
-
-							<a href="#" class="image featured"><img src="images/archery.gif" alt="" class="image featured"/></a>
-
-							<p>I'm a fourth year CS major studying at UC Berkeley. Currently my area of study is in electrical engineering, working towards 
-								IC circuit design and computer hardware engineering. Software topics I am interested in currently are computer vision,
-								parallel processing, and related HPC topics.<br> My previous coursework have included topics such as machine learning, computer
-								architecture, computer security, data structures, and algorithms.
+							<br>
+							<p>
+								Finally, having calculated the shifts needed to align the images, the negatives were turned into positives, and stacked to form a 3-channel RGB representation of the coloured image.
 							</p>
-
-						</div>
-					</section>
+							<br>
+							<h2>Issues, Bells, and Whistles</h2>
+							<p>
+								Finally, having calculated the shifts needed to align the images, the negatives were turned into positives, and stacked to form a 3-channel RGB representation of the coloured image.
+							</p>
 			</div>
 
 		<!-- Footer -->
-			<div id="footer">
+			<div style="margin-left: 0;" id="footer">
 
 				<!-- Copyright -->
 					<ul class="copyright">
