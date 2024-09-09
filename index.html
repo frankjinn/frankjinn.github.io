@@ -1,97 +1,152 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Frank Jin</title>
-		<link rel="icon" type="image/x-icon" href="indexImages/icon.ico">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="desciption" content="Portfolio website for Frank Jin at UC Berkeley." />
-		<meta name="keywords" content="Frank Jin, frankjinn, Berkeley, Portfolio, Computer"/>
-		<meta name="author" content="Frank Jin">
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+  <head>
+    <title>Frank Jin</title>
+    <link rel="icon" type="image/x-icon" href="indexImages/icon.ico" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <meta
+      name="desciption"
+      content="Portfolio website for Frank Jin at UC Berkeley."
+    />
+    <meta
+      name="keywords"
+      content="Frank Jin, frankjinn, Berkeley, Portfolio, Computer"
+    />
+    <meta name="author" content="Frank Jin" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <div id="header">
+      <div class="top">
+        <!-- Logo -->
+        <div id="logo">
+          <span class="image avatar48"
+            ><img src="indexImages/avatar.jpg" alt=""
+          /></span>
+          <h1 id="title">Frank Jin</h1>
+          <p>Software Engineer</p>
+        </div>
 
-		<!-- Header -->
-			<div id="header">
-				<div class="top">
-					<!-- Logo -->
-						<div id="logo">
-							<span class="image avatar48"><img src="indexImages/avatar.jpg" alt="" /></span>
-							<h1 id="title">Frank Jin</h1>
-							<p>Software Engineer</p>
-						</div>
+        <!-- Nav -->
+        <nav id="nav">
+          <ul>
+            <li>
+              <a href="#top" id="top-link"
+                ><span class="icon solid fa-home">Intro</span></a
+              >
+            </li>
+            <li>
+              <a href="#portfolio" id="portfolio-link"
+                ><span class="icon solid fa-th">Portfolio</span></a
+              >
+            </li>
+            <li>
+              <a href="#work" id="portfolio-link"
+                ><span class="icon solid fa-th">Work Samples</span></a
+              >
+            </li>
+            <li>
+              <a href="computationalPhotography.html" id="portfolio-link"
+                ><span class="icon solid fa-user">Imagery Projects</span></a
+              >
+            </li>
+            <li>
+              <a href="#about" id="about-link"
+                ><span class="icon solid fa-user">About Me</span></a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li>
-								<li><a href="#work" id="portfolio-link"><span class="icon solid fa-th">Work Samples</span></a></li>
-								<li><a href="computationalPhotography.html" id="portfolio-link"><span class="icon solid fa-user">Imagery Projects</span></a></li>
-								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li>
-							</ul>
-						</nav>
+      <div class="bottom">
+        <!-- Social Icons -->
+        <ul class="icons">
+          <li>
+            <a
+              href="https://github.com/frankjinn"
+              class="icon brands fa-github"
+              target="_blank"
+              ><span class="label">Github</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="icon solid fa-envelope" onclick="copyEmail()"
+              ><span class="label">Email</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
 
-				</div>
+    <!-- Main -->
+    <div id="main">
+      <!-- Intro -->
+      <section id="top" class="one dark cover">
+        <div class="container">
+          <header>
+            <h2 class="alt">
+              Hi! I'm <strong>Frank Jin</strong>, a student at UC Berkeley
+              studying software and electrical engineering.
+            </h2>
+            <p
+              id="typeDesc"
+              style="max-width: 20em; margin-left: auto; margin-right: auto"
+            ></p>
+          </header>
 
-				<div class="bottom">
+          <footer>
+            <a href="#portfolio" class="button scrolly">Portfolio</a>
+          </footer>
+        </div>
+      </section>
 
-					<!-- Social Icons -->
-						<ul class="icons">
-							<li><a href="https://github.com/frankjinn" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
-							<li><a href="#" class="icon solid fa-envelope" onclick="copyEmail()"><span class="label">Email</span></a></li>
-						</ul>
+      <!-- Projects -->
+      <section id="portfolio" class="two">
+        <div class="container">
+          <header>
+            <h2>Projects</h2>
+          </header>
 
-				</div>
+          <h3>
+            Haptic Sidewalk Navigator Using Semantic Segmentation
+            <a href="https://github.com/frankjinn/HapticVision" target="_blank">
+              Repository Link</a
+            >
+          </h3>
+          <p>
+            This an ongoing project that attempts to create a sidewalk
+            navagation haptic device using semantic segmentation. The device
+            will identify the borders of the sidewalk using a camera and a
+            miniature computer running a semantic segmentation model. The info
+            is then relayed to a bacelet of an array of haptic motors which
+            guide the user towards the correct direction.
+          </p>
+          <p>
+            Current Update (July 3, 2024): Finished demo of haptic interface for
+            distance detection, finished polygonal approximation of labeled
+            training images.
+          </p>
 
-			</div>
-
-		<!-- Main -->
-			<div id="main">
-
-				<!-- Intro -->
-					<section id="top" class="one dark cover">
-						<div class="container">
-
-							<header>
-								<h2 class="alt">Hi! I'm <strong>Frank Jin</strong>, a student at UC Berkeley studying software and electrical engineering.</h2>
-								<p id="typeDesc" style="max-width: 20em; margin-left: auto; margin-right: auto;"></p>
-							</header>
-
-							<footer>
-								<a href="#portfolio" class="button scrolly">Portfolio</a>
-							</footer>
-
-						</div>
-					</section>
-
-				<!-- Projects -->
-					<section id="portfolio" class="two">
-						<div class="container">
-							<header>
-								<h2>Projects</h2>
-							</header>
-
-							<h3>Haptic Sidewalk Navigator Using Semantic Segmentation 
-								<a href="https://github.com/frankjinn/HapticVision" target="_blank"> Repository Link</a>
-							</h3>
-							<p>This an ongoing project that attempts to create a sidewalk navagation haptic device using semantic segmentation.
-								The device will identify the borders of the sidewalk using a camera and a miniature computer running a semantic segmentation model.
-								The info is then relayed to a bacelet of an array of haptic motors which guide the user towards the correct direction.
-							</p>
-							<p>
-								Current Update (July 3, 2024): Finished demo of haptic interface for distance detection, finished polygonal approximation of labeled
-								training images.
-							</p>
-
-							<article class="item">
-								<a href="#" class="image large" style="aspect-ratio: 2.55/1; max-width: 70%;"><img src="indexImages/HapticVisionImages/Polygon_screenshot_03.07.2024.png" alt="" /></a>
-								<header class="text large" style="max-width: 70%;">
-									Polygonal Approximation of Car Instance Area
-								</header>
-							</article>
-							<!-- <div class="row">
+          <article class="item">
+            <a
+              href="#"
+              class="image large"
+              style="aspect-ratio: 2.55/1; max-width: 70%"
+              ><img
+                src="indexImages/HapticVisionImages/Polygon_screenshot_03.07.2024.png"
+                alt=""
+            /></a>
+            <header class="text large" style="max-width: 70%">
+              Polygonal Approximation of Car Instance Area
+            </header>
+          </article>
+          <!-- <div class="row">
 								<div class="col-4 col-12-mobile">
 									<article class="item">
 										<a href="#" class="image fit"><img src="indexImages/pic02.jpg" alt="" /></a>
@@ -136,240 +191,296 @@
 								</div>
 							</div> -->
 
-							<br>
-							<h3>CUDA Mini-Projects</h3>
-							<p>A collection of small projects written using CUDA C/C++, with guidance from "CUDA by Example" textbook.</p>
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/CUDAImages/juliaSet.png" alt="" /></a>
-										<header>
-											<h3>GPU Accelerated Julia Set</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/CUDAImages/rayTrace.png" alt="" /></a>
-										<header>
-											<h3>Ray Tracing Randomly Generated Spheres</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/CUDAImages/ripple.gif" alt="" /></a>
-										<header>
-											<h3>Ripple Animation Using 2-Dimensional Multi-Threading</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/CUDAImages/heatTransfer.gif" alt="" /></a>
-										<header>
-											<h3>Naive Heat Transfer Simulation</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/pic06.jpg" alt="" /></a>
-										<header>
-											<h3>GPU Accelerated Add</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/pic07.jpg" alt="" /></a>
-										<header>
-											<h3>GPU Accelerated Dot</h3>
-										</header>
-									</article>
-								</div>
-							</div>
+          <br />
+          <h3>CUDA Mini-Projects</h3>
+          <p>
+            A collection of small projects written using CUDA C/C++, with
+            guidance from "CUDA by Example" textbook.
+          </p>
+          <div class="row">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/CUDAImages/juliaSet.png" alt=""
+                /></a>
+                <header>
+                  <h3>GPU Accelerated Julia Set</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/CUDAImages/rayTrace.png" alt=""
+                /></a>
+                <header>
+                  <h3>Ray Tracing Randomly Generated Spheres</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/CUDAImages/ripple.gif" alt=""
+                /></a>
+                <header>
+                  <h3>Ripple Animation Using 2-Dimensional Multi-Threading</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/CUDAImages/heatTransfer.gif" alt=""
+                /></a>
+                <header>
+                  <h3>Naive Heat Transfer Simulation</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/pic06.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>GPU Accelerated Add</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/pic07.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>GPU Accelerated Dot</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
 
-						</div>
-					</section>
+      <!-- Work -->
+      <section id="work" class="two">
+        <div class="container">
+          <header>
+            <h2>Work Samples</h2>
+            <p>Some visual examples of previous work I have done.</p>
+          </header>
 
-					<!-- Work -->
-					<section id="work" class="two">
-						<div class="container">
-							<header>
-								<h2>Work Samples</h2>
-								<p>
-									Some visual examples of previous work I have done.
-								</p>
-							</header>
+          <h3>KwikKart</h3>
+          <p>
+            ML Engineer (May 2024 - Current) <br />
+            Self-checkout shopping cart integration, using computer vision
+            models to prevent theft. Worked on improving model accuracy in theft
+            detection. Below are some examples of what the CV model that my team
+            and I worked on.
+          </p>
+          <div class="row">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit">
+                  <video class="image fit" autoplay muted loop>
+                    <source
+                      src="indexImages/KwikKart/CameraCover_output_mjpg12_FPS20.webm"
+                      type="video/webm"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+                <header>
+                  <h3>Covered Camera</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><video class="image fit" autoplay muted loop>
+                    <source
+                      src="indexImages/KwikKart/MultipleItems-NoScan_output_mjpg268_FPS20.webm"
+                      type="video/webm"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+                <header>
+                  <h3>Multiple Items No Scan</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><video class="image fit" autoplay muted loop>
+                    <source
+                      src="indexImages/KwikKart/NoScan_output_mjpg2_FPS20.webm"
+                      type="video/webm"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+                <header>
+                  <h3>No Scan</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><video class="image fit" autoplay muted loop>
+                    <source
+                      src="indexImages/KwikKart/Scanned_output_mjpg2_FPS20.webm"
+                      type="video/webm"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+                <header>
+                  <h3>Scanned Item (Normal)</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><video class="image fit" autoplay muted loop>
+                    <source
+                      src="indexImages/KwikKart/ScanOneEnterAnother_output_mjpg94_FPS20.webm"
+                      type="video/webm"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+                <header>
+                  <h3>Scan One, Enter Another</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><video class="image fit" autoplay muted loop>
+                    <source
+                      src="indexImages/KwikKart/Suspicious_output_mjpg188_FPS20.webm"
+                      type="video/webm"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+                <header>
+                  <h3>Suspicious Output</h3>
+                </header>
+              </article>
+            </div>
+          </div>
 
-							<h3>KwikKart</h3>
-							<p>
-								ML Engineer (May 2024 - Current) <br> 
-								Self-checkout shopping cart integration, using computer vision models to prevent theft. Worked on improving model accuracy in theft detection.
-								Below are some examples of what the CV model that my team and I worked on.
-							</p>
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit">
-											<video class="image fit" autoplay muted loop>
-												<source src="indexImages/KwikKart/CameraCover_output_mjpg12_FPS20.webm" type="video/webm">
-										  			Your browser does not support the video tag.
-										  	</video>
-										</a>
-										<header>
-											<h3>Covered Camera</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="indexImages/KwikKart/MultipleItems-NoScan_output_mjpg268_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Multiple Items No Scan</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="indexImages/KwikKart/NoScan_output_mjpg2_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>No Scan</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="indexImages/KwikKart/Scanned_output_mjpg2_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Scanned Item (Normal)</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="indexImages/KwikKart/ScanOneEnterAnother_output_mjpg94_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Scan One, Enter Another</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><video class="image fit" autoplay muted loop>
-											<source src="indexImages/KwikKart/Suspicious_output_mjpg188_FPS20.webm" type="video/webm">
-												  Your browser does not support the video tag.
-										  </video>
-										</a>
-										<header>
-											<h3>Suspicious Output</h3>
-										</header>
-									</article>
-								</div>
-							</div>
+          <br />
+          <h3>Rimble</h3>
+          <p>
+            ML and Data Engineering Consultant (May 2023 - June 2024) <br />
+            Esport player statistics and game win result predictions. The
+            following are a few examples of the results after model improvments
+            made by me (here we are predicting on CS2 data). Achieved an average
+            of 25% decrease in MSE.
+          </p>
+          <article class="item">
+            <a href="#" class="image large"
+              ><img src="indexImages/Rimble/PCACount.png" alt=""
+            /></a>
+            <header class="text large">
+              <h3>Feature Selection Using PCA Components</h3>
+            </header>
+          </article>
+          <div class="row">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/Rimble/killsNew.png" alt=""
+                /></a>
+                <header>
+                  <h3>New Model's Kills Error Curve</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/Rimble/killsPrev.png" alt=""
+                /></a>
+                <header>
+                  <h3>Previous Model's Kills Error Curve</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/Rimble/adrNew.png" alt=""
+                /></a>
+                <header>
+                  <h3>New Model's Deaths Error Curve</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/Rimble/adrPrev.png" alt=""
+                /></a>
+                <header>
+                  <h3>Previous Model's Death Error Curve</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/Rimble/kastNew.png" alt=""
+                /></a>
+                <header>
+                  <h3>New Model's KAST Error Curve</h3>
+                </header>
+              </article>
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="indexImages/Rimble/kastPrev.png" alt=""
+                /></a>
+                <header>
+                  <h3>Previous Model's KAST Error Curve</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- About Me -->
+      <section id="about" class="three">
+        <div class="container">
+          <header>
+            <h2>About Me</h2>
+          </header>
 
-							<br>
-							<h3>Rimble</h3>
-							<p> ML and Data Engineering Consultant (May 2023 - June 2024) <br> 
-								Esport player statistics and game win result predictions. The following are a few examples of the results after model
-								improvments made by me (here we are predicting on CS2 data). Achieved an average of 25% decrease in MSE.
-							</p>
-							<article class="item">
-								<a href="#" class="image large"><img src="indexImages/Rimble/PCACount.png" alt="" /></a>
-								<header class="text large">
-									<h3>Feature Selection Using PCA Components</h3>
-								</header>
-							</article>
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/Rimble/killsNew.png" alt="" /></a>
-										<header>
-											<h3>New Model's Kills Error Curve</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/Rimble/killsPrev.png" alt="" /></a>
-										<header>
-											<h3>Previous Model's Kills Error Curve</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/Rimble/adrNew.png" alt="" /></a>
-										<header>
-											<h3>New Model's Deaths Error Curve</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/Rimble/adrPrev.png" alt="" /></a>
-										<header>
-											<h3>Previous Model's Death Error Curve</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/Rimble/kastNew.png" alt="" /></a>
-										<header>
-											<h3>New Model's KAST Error Curve</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="indexImages/Rimble/kastPrev.png" alt="" /></a>
-										<header>
-											<h3>Previous Model's KAST Error Curve</h3>
-										</header>
-									</article>
-								</div>
-							</div>
+          <a href="#" class="image featured"
+            ><img src="indexImages/archery.gif" alt="" class="image featured"
+          /></a>
 
-						</div>
-					</section>
-				<!-- About Me -->
-					<section id="about" class="three">
-						<div class="container">
+          <p>
+            I'm a fourth year CS major studying at UC Berkeley. Currently my
+            area of study is in electrical engineering, working towards IC
+            circuit design and computer hardware engineering. Software topics I
+            am interested in currently are computer vision, parallel processing,
+            and related HPC topics.<br />
+            My previous coursework have included topics such as machine
+            learning, computer architecture, computer security, data structures,
+            and algorithms.
+          </p>
+        </div>
+      </section>
+    </div>
 
-							<header>
-								<h2>About Me</h2>
-							</header>
+    <!-- Footer -->
+    <div id="footer">
+      <!-- Copyright -->
+      <ul class="copyright">
+        <li>&copy; Untitled. All rights reserved.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </div>
 
-							<a href="#" class="image featured"><img src="indexImages/archery.gif" alt="" class="image featured"/></a>
-
-							<p>I'm a fourth year CS major studying at UC Berkeley. Currently my area of study is in electrical engineering, working towards 
-								IC circuit design and computer hardware engineering. Software topics I am interested in currently are computer vision,
-								parallel processing, and related HPC topics.<br> My previous coursework have included topics such as machine learning, computer
-								architecture, computer security, data structures, and algorithms.
-							</p>
-
-						</div>
-					</section>
-			</div>
-
-		<!-- Footer -->
-			<div id="footer">
-
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>
