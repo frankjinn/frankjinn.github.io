@@ -31,7 +31,9 @@
             <li>
               <a href="#Hybrid" id="proj1-link">Hybrid Images</a>
             </li>
-            <li><a href="#Gallery" id="proj1-link">Gallery</a></li>
+            <li>
+              <a href="#Multi-Resolution" id="proj1-link">Multi-Resolution</a>
+            </li>
             <!-- <li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li>
 								<li><a href="#work" id="portfolio-link"><span class="icon solid fa-th">Work Samples</span></a></li>
 								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li> -->
@@ -430,7 +432,13 @@
           When using color it is best practice to color the low passed image, as
           colors are more recognizable from a distance. Also, it helps
           distinguish the low-pass image from far away. Where as coloring both,
-          or coloring the high-pass image makes the images harder to seperate.
+          or coloring the high-pass image makes the images harder to seperate. A
+          not so obvious failure is that if we color both images, then the
+          colors will interfere with each other and make the resulting hybrid
+          image very hard to distinguish. This is seen in one of the following
+          examples. Another more obvious way of failure is trying to make a
+          hybrid of two images that clearly done line up. This will also lead to
+          poor results.
         </p>
         <article class="item">
           <div class="row" style="justify-content: center">
@@ -454,7 +462,10 @@
                     alt=""
                 /></a>
                 <header>
-                  <h3>Another example of colouring both images</h3>
+                  <h3>
+                    Another example of colouring both images. This fails as the
+                    image interferes with each other.
+                  </h3>
                 </header>
               </article>
             </div>
@@ -490,123 +501,144 @@
           As you can see, the low pass colored image is by far the best at all
           distances.
         </p>
+        <section id="Multi-Resolution" class="two">
+          <div class="container">
+            <h3>Multi-Resolution Blending</h3>
+            <p>
+              Going into the next part, we are trying to create images that can
+              seamlessly blend into each other. We do this by creating a stack
+              of laplacian filtered images. This creates a stack of images that
+              decrease in frequency. In other words, this stack of images each
+              represent some bandwith of frequencies that the images contain. By
+              calculating this, adding a masking filter, and applying a gaussian
+              over the masking filter, we can line up the bandwidths of two
+              images, and merge them together. After all the layers of
+              bandwidths have been added together, we can then sum up the stack,
+              and add in the base gaussian.
+            </p>
+            <p>
+              The Laplace stack is calulated by first forming a gaussian stack.
+              The gaussian stack is formed by taking a gaussian filter, and
+              successively convoluting it with the image. The Laplace stack is
+              the difference between each gaussian layer. An example is the
+              oraple, which is shown below.
+            </p>
 
-        <h3>Going into the next part we have images that</h3>
-        <p>
-          Another issue I found was that image normalization helped with the
-          alignment of images. I suspect this is because if the image was very
-          bright to begin with, the difference between NCC scores would be small
-          wherever you shifted the image. Normalization helps with this because
-          it scales the darkest value and brightest values, to the min and max
-          of the intensity range. Therefore, the normalization stretches out the
-          NCC differences, allowing there to be a greater difference between the
-          NCC score of good alignment and the NCC score of of bad alignment.
-        </p>
-        <article class="item">
-          <a
-            href="#"
-            class="image large"
-            style="aspect-ratio: 2.55/1; max-width: 70%"
-            ><img
-              src="../CS180Images/ImgData/ImgNoNormalization/church_colourized.jpg"
-              alt=""
-          /></a>
-          <header class="text large" style="max-width: 70%">
-            "Church" Aligned Without Normalization.
-          </header>
-        </article>
-        <article class="item">
-          <a
-            href="#"
-            class="image large"
-            style="aspect-ratio: 2.55/1; max-width: 70%"
-            ><img src="../CS180Images/ImgData/church_colourized.jpg" alt=""
-          /></a>
-          <header class="text large" style="max-width: 70%">
-            "Church" Aligned With Normalization.
-          </header>
-        </article>
-        <h3>Black Point adjustment and Contrast Adjustment</h3>
-        <p>
-          Lastly, all the images shown have had an automatic blackpoint
-          adjustment and a manual contrast adjustment. The blackpoint adjustment
-          find the 2nd percentile pixle value of each filter, and zeros them
-          out. This allows the light exposed old filter, to have more distinct
-          blacks.
-        </p>
-        <article class="item">
-          <a
-            href="#"
-            class="image large"
-            style="aspect-ratio: 2.55/1; max-width: 70%"
-            ><img
-              src="../CS180Images/ImgData/ImgNoNormalization/melons_colourized.jpg"
-              alt=""
-          /></a>
-          <header class="text large" style="max-width: 70%">
-            "Melons" No Adjustment.
-          </header>
-        </article>
-        <article class="item">
-          <a
-            href="#"
-            class="image large"
-            style="aspect-ratio: 2.55/1; max-width: 70%"
-            ><img src="../CS180Images/ImgData/melons_colourized.jpg" alt=""
-          /></a>
-          <header class="text large" style="max-width: 70%">
-            "Church" Adjusted.
-          </header>
-        </article>
-      </section>
-      <section id="Gallery">
-        <h3>Gallery</h3>
-        <div class="row">
-          <div class="column">
-            <img src="../CS180Images/ImgData/cathedral_colourized.jpg" />
-            <img src="../CS180Images/ImgData/church_colourized.jpg" />
-            <img src="../CS180Images/ImgData/harvesters_colourized.jpg" />
-            <img src="../CS180Images/ImgData/hut_colourized.jpg" />
-            <img src="../CS180Images/ImgData/icon_colourized.jpg" />
-            <img src="../CS180Images/ImgData/lady_colourized.jpg" />
-          </div>
-          <div class="column">
-            <img src="../CS180Images/ImgData/melons_colourized.jpg" />
-            <img src="../CS180Images/ImgData/monastery_colourized.jpg" />
-            <img src="../CS180Images/ImgData/onion_church_colourized.jpg" />
-            <img src="../CS180Images/ImgData/roses_colourized.jpg" />
-            <img src="../CS180Images/ImgData/sculpture_colourized.jpg" />
-            <img src="../CS180Images/ImgData/self_portrait_colourized.jpg" />
-          </div>
-          <div class="column">
-            <img src="../CS180Images/ImgData/spires_colourized.jpg" />
-            <img
-              src="../CS180Images/ImgData/three_generations_colourized.jpg"
-            />
-            <img src="../CS180Images/ImgData/tobolsk_colourized.jpg" />
-            <img src="../CS180Images/ImgData/train_colourized.jpg" />
-            <img src="../CS180Images/Emir/emir_colourized.jpg" />
-          </div>
-        </div>
-        <p>
-          The shifts used for all these images are &#40;shifts of G and R
-          relative to B. [x, y]&#41;:
-        </p>
-        <p>
-          cathedral.jpg [[ 2 5] [ 3 12]] church.tif [[ 3 25] [-4 58]]
-          harvesters.tif [[ 16 59] [ 13 124]] hut.jpg [[ 5 5] [ 6 11]] icon.tif
-          [[17 40] [23 89]] lady.tif [[ 8 56] [ 10 118]] melons.tif [[ 10 83] [
-          13 179]] monastery.jpg [[ 2 -3] [ 2 3]] onion_church.tif [[ 25 52] [
-          36 108]] roses.jpg [[ 0 5] [-3 11]] sculpture.tif [[-11 33] [-27 139]]
-          self_portrait.tif [[ 29 79] [ 36 176]] spire.jpg [[ 1 5] [ 2 12]]
-          three_generations.tif [[ 13 53] [ 11 112]] tobolsk.jpg [[2 3] [3 6]]
-          train.tif [[ 4 42] [31 86]] emir.tif [[22, 51] [41, 107]]
-        </p>
+            <article class="item">
+              <div class="col-4 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img
+                      src="../project2Images/webImages/part2.3/oraple.png"
+                      alt=""
+                  /></a>
+                  <header>
+                    <h3>Breakdown of the oraple to its bandwidths.</h3>
+                  </header>
+                </article>
+              </div>
+            </article>
 
-        <p>
-          If unsure what the image name is, use save-as feature of browser, it
-          will display the name of the image.
-        </p>
+            <p>Through this method we can make some pretty cool images!</p>
+            <article class="item">
+              <div class="row">
+                <div class="col-3 col-12-mobile">
+                  <article class="item">
+                    <a href="#" class="image fit"
+                      ><img src="../project2Images/images/orange.jpeg" alt=""
+                    /></a>
+                    <header>
+                      <h3>We have an orange...</h3>
+                    </header>
+                  </article>
+                </div>
+                <div class="col-3 col-12-mobile">
+                  <article class="item">
+                    <a href="#" class="image fit"
+                      ><img src="../project2Images/images/apple.jpeg" alt=""
+                    /></a>
+                    <header>
+                      <h3>We have an apple...</h3>
+                    </header>
+                  </article>
+                </div>
+                <div class="col-3 col-12-mobile">
+                  <article class="item">
+                    <a href="#" class="image fit"
+                      ><img
+                        src="../project2Images/webImages/part2.4/orapleRemadeGreyscale.jpg"
+                        alt=""
+                    /></a>
+                    <header>
+                      <h3>Boom, orapple!</h3>
+                    </header>
+                  </article>
+                </div>
+                <div class="col-3 col-12-mobile">
+                  <article class="item">
+                    <a href="#" class="image fit"
+                      ><img
+                        src="../project2Images/webImages/part2.4/orapleRemadeColored.jpg"
+                        alt=""
+                    /></a>
+                    <header>
+                      <h3>Boom, orapple colored!</h3>
+                    </header>
+                  </article>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4 col-12-mobile">
+                  <article class="item">
+                    <a href="#" class="image fit"
+                      ><img
+                        src="../project2Images/images/watermelon.jpg"
+                        alt=""
+                    /></a>
+                    <header>
+                      <h3>We have an watermelon...</h3>
+                    </header>
+                  </article>
+                </div>
+                <div class="col-4 col-12-mobile">
+                  <article class="item">
+                    <a href="#" class="image fit"
+                      ><img src="../project2Images/images/cantelope.png" alt=""
+                    /></a>
+                    <header>
+                      <h3>We have an cantelope...</h3>
+                    </header>
+                  </article>
+                </div>
+                <div class="col-4 col-12-mobile">
+                  <article class="item">
+                    <a href="#" class="image fit"
+                      ><img
+                        src="../project2Images/webImages/part2.4/wateralope.jpg"
+                        alt=""
+                    /></a>
+                    <header>
+                      <h3>Boom, wateralope!</h3>
+                    </header>
+                  </article>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+        <p>We can also make other funky stuff like this:</p>
+        <article class="item">
+          <a
+            href="#"
+            class="image large"
+            style="aspect-ratio: 2.55/1; max-width: 70%"
+            ><img src="../project2Images/webImages/part2.4/thumb.png" alt=""
+          /></a>
+          <header class="text large" style="max-width: 70%">
+            Me as a thumb!
+          </header>
+        </article>
       </section>
     </div>
 
