@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frank Jin</title>
+    <link rel="icon" type="../image/x-icon" href="../indexImages/icon.ico" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <meta
+      name="desciption"
+      content="Portfolio website for Frank Jin at UC Berkeley."
+    />
+    <meta
+      name="keywords"
+      content="Frank Jin, frankjinn, Berkeley, Portfolio, Computer"
+    />
+    <meta name="author" content="Frank Jin" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <div id="header">
+      <div class="top">
+        <!-- Nav -->
+        <nav id="nav">
+          <ul>
+            <li><a href="#Intro" id="proj1-link">Intro</a></li>
+            <li><a href="#Sharpening" id="proj1-link">Image Sharpening</a></li>
+            <li>
+              <a href="#Hybrid" id="proj1-link">Hybrid Images</a>
+            </li>
+            <li><a href="#Gallery" id="proj1-link">Gallery</a></li>
+            <!-- <li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li>
+								<li><a href="#work" id="portfolio-link"><span class="icon solid fa-th">Work Samples</span></a></li>
+								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li> -->
+          </ul>
+        </nav>
+      </div>
+      <div class="bottom">
+        <!-- Social Icons -->
+        <!-- <ul class="icons">
+							<li><a href="https://github.com/frankjinn" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope" onclick="copyEmail()"><span class="label">Email</span></a></li>
+						</ul> -->
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div id="main">
+      <!-- Projects -->
+      <section id="Intro" class="two">
+        <div class="container">
+          <header>
+            <h2>Project 2: Fun With Frequencies</h2>
+            <p>
+              In this project, I play around the frequency space of images. You
+              will see things such as, line detection, image sharpening, hybrid
+              images, and multi-resolution blending.
+            </p>
+          </header>
+
+          <h3>Line detection</h3>
+          <p>
+            In this first section, I worked on image smoothing and sharpening.
+            Starting with line detection, in the images below, I used two
+            different types of filters. The Dx filter is a square matrix of [1,
+            -1], while the Dy filter is a square matrix of [[1], [-1]]. Inverse
+            to its name, the Dx filter approximates the derivative in the x
+            direction, which in turns finds verticle lines. While the Dy filter
+            does the same, but vertically, hence finding horizontal lines. You
+            can see this when comparing to the original image. We can also try
+            using percentile to try to clip to the lowest values of the line
+            detection image. Although it needs manual adjustment, it works
+            pretty well.
+          </p>
+
+          <article class="item">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project2Images/images/cameraman.png" alt=""
+                /></a>
+                <header>
+                  <h3>Original Cameraman Image</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part1/SimpleLineDetection.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>After applying Dx on the left, and Dy on the right.</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part1/percentileClippedNoise.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Original Tobolsk Image</h3>
+                </header>
+              </article>
+            </div>
+          </article>
+
+          <p>
+            Moreover, we can also apply a gaussian blur to the image before hand
+            as a low-pass filter, and getting rid of the highest frequencies.
+            This will only leave more notable lines, efffectively eliminating
+            noise. We can also combine the blurring and convolution of the Dx
+            and Dy filters together, due to the commutive properties of
+            convolution this will result in the same image.
+          </p>
+
+          <article class="item">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part1/blurredCameraMan.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Blurred Cameraman Image</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part1/blurredLineDetection.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Applying Dx and Dy to the blurred image.</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part1/combinedBlurringAndLine.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>
+                    The result of applying the combined blur and Dy Dx. The
+                    result is the same.
+                  </h3>
+                </header>
+              </article>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="Sharpening">
+        <h2>Image Sharpening</h2>
+        <p>
+          By the same principle of finding the lines in the image, which are the
+          high frequency components of the image. We can also add them back into
+          the original image, to achieve a sharpening effect. This will make the
+          blurry parts of the image appear more distinct. Again we can also do
+          this with a single convolution, by taking the image at each kernel,
+          and subtracting away the a gaussian blurred version of the image. This
+          is equivalent to adding the high frequency part.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/unsharpenedTaj.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Original Taj Image</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/sharpenedTaj.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Sharpened Taj Image</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/unsharpenedBabyBrother.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Original image of my younger brother kayaking.</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/sharpenedBabyBrother.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Sharpened image of my younger brother kayaking.</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/unsharpenedCalVucla.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Original image of UCB vs UCLA volleyball game.</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/sharpenedCalVucla.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Sharpened image of UCB vs UCLA volleyball game.</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>
+          We can verify that this works by blurring a photo, and then sharpening
+          it again. Suprisingly however, I noticed that the resharpened image
+          does not seem to be the same quality. This may be because the image
+          data is lost during gaussian convolution. As a result, it is not
+          possible to recover the original image through this method.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project2Images/images/garden.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>Original garden image featuring grandfather!</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/blurredGarden.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Blurred garden image</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.1/resharpenedGarden.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Resharpened garden image</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+      </section>
+      <section id="Hybrid">
+        <h3>Hybrid Images</h3>
+        <p>
+          Another thing we can do with frequency manipulation is create hybrid
+          images. These are images that are created using the low frequencies of
+          one image, and the high frequencies of another. The result of
+          combining the two is that we get an image that appears to be one thing
+          from a distance, and another when up close.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/images/angryGuyAligned.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Angry Person!</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/images/happyGuyAligned.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Happy?? Person</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/happyAngeryGuyHybrid.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Angry from far away and Happy from up close!</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>
+          This is created by noticing taking the low pass and high pass of the
+          images, then adding them together. We can also look at the FFT
+          spectrum of the image, notice how the lines are quite distint. This
+          allows the image to the distinguishable from each other.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/angryGuyFFT.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>FFT of Angry person</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/happyGuyFFT.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>FFT of Happy person</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/happyAngryGuyHybridFFT.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>FFT of the hybrid image</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/angryGuyLowPassFFT.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>FFT of Angry person low passed</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/happyGuyHighPassFFT.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>FFT of Happy person high passed</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>
+          When using color it is best practice to color the low passed image, as
+          colors are more recognizable from a distance. Also, it helps
+          distinguish the low-pass image from far away. Where as coloring both,
+          or coloring the high-pass image makes the images harder to seperate.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/guyCatHybridColored.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Colouring both images</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/fionaCatHybridBothColored.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Another example of colouring both images</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/fionaCatHybridHighPassColored.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Coloring only the high pass image</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project2Images/webImages/part2.2/fionaCatHybridLowPassColored.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Coloring only the low pass image</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>
+          As you can see, the low pass colored image is by far the best at all
+          distances.
+        </p>
+
+        <h3>Going into the next part we have images that</h3>
+        <p>
+          Another issue I found was that image normalization helped with the
+          alignment of images. I suspect this is because if the image was very
+          bright to begin with, the difference between NCC scores would be small
+          wherever you shifted the image. Normalization helps with this because
+          it scales the darkest value and brightest values, to the min and max
+          of the intensity range. Therefore, the normalization stretches out the
+          NCC differences, allowing there to be a greater difference between the
+          NCC score of good alignment and the NCC score of of bad alignment.
+        </p>
+        <article class="item">
+          <a
+            href="#"
+            class="image large"
+            style="aspect-ratio: 2.55/1; max-width: 70%"
+            ><img
+              src="../CS180Images/ImgData/ImgNoNormalization/church_colourized.jpg"
+              alt=""
+          /></a>
+          <header class="text large" style="max-width: 70%">
+            "Church" Aligned Without Normalization.
+          </header>
+        </article>
+        <article class="item">
+          <a
+            href="#"
+            class="image large"
+            style="aspect-ratio: 2.55/1; max-width: 70%"
+            ><img src="../CS180Images/ImgData/church_colourized.jpg" alt=""
+          /></a>
+          <header class="text large" style="max-width: 70%">
+            "Church" Aligned With Normalization.
+          </header>
+        </article>
+        <h3>Black Point adjustment and Contrast Adjustment</h3>
+        <p>
+          Lastly, all the images shown have had an automatic blackpoint
+          adjustment and a manual contrast adjustment. The blackpoint adjustment
+          find the 2nd percentile pixle value of each filter, and zeros them
+          out. This allows the light exposed old filter, to have more distinct
+          blacks.
+        </p>
+        <article class="item">
+          <a
+            href="#"
+            class="image large"
+            style="aspect-ratio: 2.55/1; max-width: 70%"
+            ><img
+              src="../CS180Images/ImgData/ImgNoNormalization/melons_colourized.jpg"
+              alt=""
+          /></a>
+          <header class="text large" style="max-width: 70%">
+            "Melons" No Adjustment.
+          </header>
+        </article>
+        <article class="item">
+          <a
+            href="#"
+            class="image large"
+            style="aspect-ratio: 2.55/1; max-width: 70%"
+            ><img src="../CS180Images/ImgData/melons_colourized.jpg" alt=""
+          /></a>
+          <header class="text large" style="max-width: 70%">
+            "Church" Adjusted.
+          </header>
+        </article>
+      </section>
+      <section id="Gallery">
+        <h3>Gallery</h3>
+        <div class="row">
+          <div class="column">
+            <img src="../CS180Images/ImgData/cathedral_colourized.jpg" />
+            <img src="../CS180Images/ImgData/church_colourized.jpg" />
+            <img src="../CS180Images/ImgData/harvesters_colourized.jpg" />
+            <img src="../CS180Images/ImgData/hut_colourized.jpg" />
+            <img src="../CS180Images/ImgData/icon_colourized.jpg" />
+            <img src="../CS180Images/ImgData/lady_colourized.jpg" />
+          </div>
+          <div class="column">
+            <img src="../CS180Images/ImgData/melons_colourized.jpg" />
+            <img src="../CS180Images/ImgData/monastery_colourized.jpg" />
+            <img src="../CS180Images/ImgData/onion_church_colourized.jpg" />
+            <img src="../CS180Images/ImgData/roses_colourized.jpg" />
+            <img src="../CS180Images/ImgData/sculpture_colourized.jpg" />
+            <img src="../CS180Images/ImgData/self_portrait_colourized.jpg" />
+          </div>
+          <div class="column">
+            <img src="../CS180Images/ImgData/spires_colourized.jpg" />
+            <img
+              src="../CS180Images/ImgData/three_generations_colourized.jpg"
+            />
+            <img src="../CS180Images/ImgData/tobolsk_colourized.jpg" />
+            <img src="../CS180Images/ImgData/train_colourized.jpg" />
+            <img src="../CS180Images/Emir/emir_colourized.jpg" />
+          </div>
+        </div>
+        <p>
+          The shifts used for all these images are &#40;shifts of G and R
+          relative to B. [x, y]&#41;:
+        </p>
+        <p>
+          cathedral.jpg [[ 2 5] [ 3 12]] church.tif [[ 3 25] [-4 58]]
+          harvesters.tif [[ 16 59] [ 13 124]] hut.jpg [[ 5 5] [ 6 11]] icon.tif
+          [[17 40] [23 89]] lady.tif [[ 8 56] [ 10 118]] melons.tif [[ 10 83] [
+          13 179]] monastery.jpg [[ 2 -3] [ 2 3]] onion_church.tif [[ 25 52] [
+          36 108]] roses.jpg [[ 0 5] [-3 11]] sculpture.tif [[-11 33] [-27 139]]
+          self_portrait.tif [[ 29 79] [ 36 176]] spire.jpg [[ 1 5] [ 2 12]]
+          three_generations.tif [[ 13 53] [ 11 112]] tobolsk.jpg [[2 3] [3 6]]
+          train.tif [[ 4 42] [31 86]] emir.tif [[22, 51] [41, 107]]
+        </p>
+
+        <p>
+          If unsure what the image name is, use save-as feature of browser, it
+          will display the name of the image.
+        </p>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <div style="margin-left: 0" id="footer">
+      <!-- Copyright -->
+      <ul class="copyright">
+        <li>&copy; Untitled. All rights reserved.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </div>
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
