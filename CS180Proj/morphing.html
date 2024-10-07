@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frank Jin</title>
+    <link rel="icon" type="../image/x-icon" href="../indexImages/icon.ico" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <meta
+      name="desciption"
+      content="Portfolio website for Frank Jin at UC Berkeley."
+    />
+    <meta
+      name="keywords"
+      content="Frank Jin, frankjinn, Berkeley, Portfolio, Computer"
+    />
+    <meta name="author" content="Frank Jin" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <div id="header">
+      <div class="top">
+        <!-- Nav -->
+        <nav id="nav">
+          <ul>
+            <li><a href="#MorphSequence" id="proj1-link">MorphSequence</a></li>
+            <li>
+              <a href="#MeanFace" id="proj1-link">MeanFace</a>
+            </li>
+            <li>
+              <a href="#Ethnicity" id="proj1-link">Ethnicity</a>
+            </li>
+            <!-- <li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li>
+								<li><a href="#work" id="portfolio-link"><span class="icon solid fa-th">Work Samples</span></a></li>
+								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li> -->
+          </ul>
+        </nav>
+      </div>
+      <div class="bottom">
+        <!-- Social Icons -->
+        <!-- <ul class="icons">
+							<li><a href="https://github.com/frankjinn" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope" onclick="copyEmail()"><span class="label">Email</span></a></li>
+						</ul> -->
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div id="main">
+      <!-- Projects -->
+      <section id="MorphSequence" class="two">
+        <div class="container">
+          <header>
+            <h2>Project 3: Morph</h2>
+            <p>
+              In this project, I play around with polygonal morphing on faces.
+            </p>
+          </header>
+
+          <h3>Face Morph</h3>
+          <p>
+            In this first section, I try to morph faces into each other through
+            a smooth transition. The first step in this process is to find the
+            "average face" between two faces. First I'll show the point
+            correspondences, for each photo.
+          </p>
+
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project3Images/meRescaled.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>My Image &#40;hair and background edited&#41;</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project3Images/meKeypoint.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>My keypoints</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project3Images/chadRescaled.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Gigachad</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project3Images/chadkeypoint.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Gigachad keypoints</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <p>
+            The next step is to take these points, average them, and morph the
+            images to the average by calculating their homogenous tranformation
+            matrices, and averaging the colors. The homogenous transformation
+            matricies were calculated by taking each an inverse map, calculated
+            by taking each triangle in the average map, finding the
+            transformation so that two of the sides of the triangle form a
+            orthogonal basis at the origin: A^-1, then finding the
+            transformation to the triangles to the image: B. The matrix product
+            of the two transformations B@A^-1 is the inverse map that find the
+            corresponding pixle from the midway face shape to each person's
+            regular face shape.
+          </p>
+
+          <p>
+            This method, however, left some bright lines between the transformed
+            triangles. I believe this is due to the transformation overlapping
+            the triangles together at random locations, since the pixles are
+            brighter intensity but the correct hue. This resulted in it being
+            very difficult to debug, in the future, another method like direct
+            pixle interpolation may provide better results.
+          </p>
+
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project3Images/midwayFace.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Midway Face</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <p>
+            With the midway face calculated. We can simply adjust the weighting
+            of the average points and the weighting of the average colors to
+            create a morph sequence.
+          </p>
+
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project3Images/meToChad.gif" alt=""
+                  /></a>
+                  <header>
+                    <h3>Midway Face</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="MeanFace">
+        <h2>Mean Faces</h2>
+        <p>
+          By the same principle, we can also find the midway face of an entire
+          population. Here we have a dataset of Brazilian faces manually
+          aligned, we can average each face to obtain an "average" face of the
+          Brazilian population.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/averageFaceUpscaled.png" alt=""
+                /></a>
+                <header>
+                  <h3>Average Face</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project3Images/colorAverageFaceUpscaled.png"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Happy Average Face</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>
+          We can try to morph our face to the average population, and vice
+          versa. The results are not so great. This may be because of various
+          differences in how our photo is taken, and me not being Brazilian. As
+          you can see later, morphing a Brazilian face to the Brazilian average
+          face oftentimes looks like there is no difference at all.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/meCropped.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>My Face</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/meWarpedToMean.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>My Face warpped to Mean</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/averageFaceUpscaled.png" alt=""
+                /></a>
+                <header>
+                  <h3>My Face</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/meanWarpedToMe.png" alt=""
+                /></a>
+                <header>
+                  <h3>My Face warpped to Mean</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>
+          Now lets try warping the Brazilian faces to the average. I played with
+          warping non-smiling images to smiling average, just to see the result.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/10a.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>Img 10a</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/10aWarped.png" alt=""
+                /></a>
+                <header>
+                  <h3>Warped 10a</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/10b.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>Img 10b</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/10bWarped.png" alt=""
+                /></a>
+                <header>
+                  <h3>Warped 10b</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/1b.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>Img 1b</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/1bWarped.png" alt=""
+                /></a>
+                <header>
+                  <h3>Warped 1b</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/21a.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>Img 21a: None-smiling</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/21aWarped.png" alt=""
+                /></a>
+                <header>
+                  <h3>Warped 21a: Warped into smiling</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/58b.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>Img 58b</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/58bWarped.png" alt=""
+                /></a>
+                <header>
+                  <h3>Warped 58b</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>
+          Another thing we can do is extrapolate and create a charactature. This
+          is done by finding the difference between my image and the average
+          image, then adding this difference by a scalar to my original image.
+          The results look like this:
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/charactature250.png" alt=""
+                /></a>
+                <header>
+                  <h3>Original garden image featuring grandfather!</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="Ethnicity">
+        <h3>Bells and Whistles: Changing Ethnicity Using Morphs</h3>
+        <p>
+          Using the average image of a population, we can play the the weights
+          and warps to see how a person would look like in different
+          ethnicities. We do this by weighted morphing and averaging the
+          population mean face and individual face together. First let us see if
+          we only change the appearance without morphing:
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/appearanceOnly.gif" alt=""
+                /></a>
+                <header>
+                  <h3>Appearance Only</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>
+          As you can see, the alginment is not very good, plus, the two subjects
+          have different face structures so it yields a poor result. Now lets
+          try changing/warping only the structure:
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/shapeOnly.jpg" alt=""
+                /></a>
+                <header>
+                  <h3>Shape Only</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>This is a bit better, but what really helps is doing both:</p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-4 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img src="../project3Images/both.gif" alt=""
+                /></a>
+                <header>
+                  <h3>Both</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+        <p>
+          In the above sequence, each loop is has increasing morph, from 0 to 1.
+          The more morph the more the individual's face becomes alligned to the
+          average face. While in each loop we can see the increasing weight of
+          the average face. Specifically the non-gif results look like this:
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <article class="item">
+              <a href="#" class="image fit"
+                ><img src="../project3Images/fionaMorphArray.jpg" alt=""
+              /></a>
+              <header>
+                <h3>Morph Array</h3>
+              </header>
+            </article>
+          </div>
+        </article>
+        <p>
+          The best results lie in the middle of the graph, where the individual
+          and average faces are blended together, rather than heavily biasing
+          one or the other. This way we keep the indivudal characteristics of
+          the individual while also apply the average face.
+        </p>
+      </section>
+    </div>
+    <!-- Footer -->
+    <div style="margin-left: 0" id="footer">
+      <!-- Copyright -->
+      <ul class="copyright">
+        <li>&copy; Untitled. All rights reserved.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </div>
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
