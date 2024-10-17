@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frank Jin</title>
+    <link rel="icon" type="../image/x-icon" href="../indexImages/icon.ico" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <meta
+      name="desciption"
+      content="Portfolio website for Frank Jin at UC Berkeley."
+    />
+    <meta
+      name="keywords"
+      content="Frank Jin, frankjinn, Berkeley, Portfolio, Computer"
+    />
+    <meta name="author" content="Frank Jin" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <div id="header">
+      <div class="top">
+        <!-- Nav -->
+        <nav id="nav">
+          <ul>
+            <li>
+              <a href="#ManualStitching" id="proj1-link">Manual Stitching</a>
+            </li>
+            <li>
+              <a href="#AutoPano" id="proj1-link">Automatic Stitching</a>
+            </li>
+            <!-- <li>
+              <a href="#Ethnicity" id="proj1-link">Ethnicity</a>
+            </li> -->
+            <!-- <li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li>
+								<li><a href="#work" id="portfolio-link"><span class="icon solid fa-th">Work Samples</span></a></li>
+								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li> -->
+          </ul>
+        </nav>
+      </div>
+      <div class="bottom">
+        <!-- Social Icons -->
+        <!-- <ul class="icons">
+							<li><a href="https://github.com/frankjinn" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope" onclick="copyEmail()"><span class="label">Email</span></a></li>
+						</ul> -->
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div id="main">
+      <!-- Projects -->
+      <section id="MorphSequence" class="two">
+        <div class="container">
+          <header>
+            <h2>Project 4: Stitching and Panoramics</h2>
+            <p>
+              In this project I continue to use keypoint matching to transform
+              images in interesting ways. This project focuses on stitching
+              multiple images together forming a single panoramic image.
+            </p>
+          </header>
+
+          <h3>Step 1: Recovering Homographies</h3>
+          <p>
+            The first step in the stitching process is to compute the transform
+            between the point-correspondances we manually define. We have to
+            solve for 8 degrees of freedom so to get a solution we need 4
+            points. However, defining exactly 4 points may lead to a poor
+            transform if there is noise. Hence we can define more than 4 points
+            to mitigate the effect of noise. However, this leads us to a
+            over-constrained solution. We can solve this by using least squares
+            to solve for the variables we need.
+          </p>
+
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img
+                      src="../project4Images/lagrida_latex_editor.png"
+                      alt=""
+                  /></a>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <p>
+            After solving, we can use this the transformation matrix to
+            transform our image so that the keypoints line up with one another.
+            In this step, I noticed that keypoints that are more spread out in
+            the image tend to work better than clustered keypoints, the edges of
+            the images where keypoints were clustered would be warped out of
+            shape. I suspect this is because when doing least squares, clustered
+            keypoints are much more effected by noise even when taking multiple
+            samples since a small variation will cause large changes. I imagine
+            this to be like trying to line up two pieces of paper use the
+            corners versus using a box inside the paper. Obviously lining up the
+            paper's corners will product much accurate results.
+          </p>
+
+          <p>
+            This method, however, left some bright lines between the transformed
+            triangles. I believe this is due to the transformation overlapping
+            the triangles together at random locations, since the pixles are
+            brighter intensity but the correct hue. This resulted in it being
+            very difficult to debug, in the future, another method like direct
+            pixle interpolation may provide better results.
+          </p>
+
+          <p>
+            After the warp has been calculated, I warp the image corners. Since
+            some of them may end up as negative coordinates, I pad and shift the
+            image that I am alligning to. Then using the shifted warped corners,
+            I create a mask by drawing a filled polygon using the PIL library.
+            This shifted mask is used to specify the coordinates to fill
+            relative to the
+            <strong style="font-weight: 900">padded image</strong>. The mask is
+            then unshifted to find the coordinates to fill relative to the
+            <strong style="font-weight: 900">original image</strong>, these
+            points are then put through the interpolator to calculate the values
+            for each pixel. The pixle values are then applied according to the
+            shifted mask.
+          </p>
+
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/shfitedCorners.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Padded and Shifted</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/mask.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Shifted Mask</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <p>
+            Finally with the setup being done, we can go onto shifting some
+            images. First off is rectifying images. This was not too bad, as we
+            just have to manually define the rectangular points we want our
+            subject to warp into, and make a dummy second image (a zero value
+            image in my case). However, due to only having 4 points and the
+            large skew of some of the images, warping the corners would
+            sometimes give extremely large coordinate values. The work around
+            for this was to just crop the image to be as close to the subject as
+            possible, therefore minimizing the coordinates of the warped
+            corners. I also tried warping something with text on it to see if
+            the text could be read after warping. The result was that the text
+            could be read, however, with a camera with better depth of view, I
+            believe the results would be better.
+          </p>
+
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/box.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Box</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/book.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Book</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/boxRectified.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Box Rectified</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/bookRectified.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Book Rectified</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <p>
+            It is a relatively easy transition to go from this, to stitching
+            images together. Its here where I ran into the issue with the
+            point-correspondances clustering problem. In the example below, you
+            see that objects on the edges of the stitch do not line up properly
+            even with blending on overlaps due to most of the points defined
+            being in near the monitor area. Another issue is that due to the
+            camera autoadjusting contrast, brightness, etc, the edges of the two
+            frames become very obvious, so its apparent a better blending method
+            is needed.
+          </p>
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/bedroomPoints.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Bedroom Correspondances</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img
+                      src="../project4Images/coloredAlignmentBlendedFixed.jpg"
+                      alt=""
+                  /></a>
+                  <header>
+                    <h3>Bedroom Pano with Average blending</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+          </article>
+          <p>
+            I tried again but this time I blended the images according to their
+            x-pixel
+            <strong style="font-weight: 900">(Bell and Whistle?)</strong>
+            coordinates and made sure to pick an image where more points could
+            be determined on the edges. Even here, the wires and the sky were
+            not ideal since they didnt have many identifiable features.
+          </p>
+          <article class="item">
+            <div class="row" style="justify-content: center">
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/outsidePoints.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Outside Correspondances</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img src="../project4Images/coloredOutside.jpg" alt=""
+                  /></a>
+                  <header>
+                    <h3>Outside Pano with Average Blending</h3>
+                  </header>
+                </article>
+              </div>
+              <div class="col-5 col-12-mobile">
+                <article class="item">
+                  <a href="#" class="image fit"
+                    ><img
+                      src="../project4Images/coloredOutsideXcoordBlending.jpg"
+                      alt=""
+                  /></a>
+                  <header>
+                    <h3>Outside Pano with X-cord blending</h3>
+                  </header>
+                </article>
+              </div>
+            </div>
+          </article>
+          <p>
+            As you can see the x-coord blending works much better, and the
+            artifacts are gone. I also attempted x and y coordinate blending,
+            however due to the way pixels values are set, it makes it difficult
+            to calculate a smooth scaling array for both the x and y directions.
+          </p>
+        </div>
+      </section>
+
+      <section id="AutoPano">
+        <h2>Automatic Point-Correspondances</h2>
+      </section>
+    </div>
+    <!-- Footer -->
+    <div style="margin-left: 0" id="footer">
+      <!-- Copyright -->
+      <ul class="copyright">
+        <li>&copy; Untitled. All rights reserved.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </div>
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
