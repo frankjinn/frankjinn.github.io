@@ -27,7 +27,7 @@
         <nav id="nav">
           <ul>
             <li>
-              <a href="#ManualStitching" id="proj1-link">Manual Stitching</a>
+              <a href="#ManualPano" id="proj1-link">Manual Stitching</a>
             </li>
             <li>
               <a href="#AutoPano" id="proj1-link">Automatic Stitching</a>
@@ -53,7 +53,7 @@
     <!-- Main -->
     <div id="main">
       <!-- Projects -->
-      <section id="MorphSequence" class="two">
+      <section id="ManualPano" class="two">
         <div class="container">
           <header>
             <h2>Project 4: Stitching and Panoramics</h2>
@@ -397,6 +397,11 @@
           eigenvalues are small, then its probably a surface, if one is small --
           a line, if both are large -- a corner. The result is a large set of
           potential interest points, which we need to further filter down.
+        </p>
+        <p>
+          You may see that no points are being picked at the very edge of the
+          image. This is important when we create feature descriptors, as points
+          on the edge would create very poor feature descriptors.
         </p>
         <article class="item">
           <div class="row" style="justify-content: center">
