@@ -364,15 +364,420 @@
 
       <section id="AutoPano">
         <h2>Automatic Point-Correspondances</h2>
+        <p>
+          Instead of the manual trudge of defining points, we can also try to
+          use an algorithmic approach. In this section we try to do exactly
+          that. We will be going through the pipeline with these images.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/originalImages.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Starter Images</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <h3>Harris Corners</h3>
+        <p>
+          The first step of the process is to try to identify potential points
+          of interest on the image. These would be things such as corners, since
+          it lends itself to be more easily localized (as opposed to lines or
+          surfaces). We use the Harris corner algorithm which computes the sum
+          of products of gradient around a image patch, then using its
+          eigenvalues to determine if its a line, edge, or surface. If both
+          eigenvalues are small, then its probably a surface, if one is small --
+          a line, if both are large -- a corner. The result is a large set of
+          potential interest points, which we need to further filter down.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/harrisCorners.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Harris Corners</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <h3>Adaptive non-maximal suppression</h3>
+        <p>
+          One method of filtering could be just taking the strongest corners in
+          the list of Harris corners we obtained. However, this often leads to
+          clusters of points, which would result in our homography to be very
+          sensitive to noise. Instead we employ a technique called "Adaptive
+          Non-maximal Suppression", which spreads out the interest points much
+          better. In theory how this algorithm works is that it finds the
+          smallest radius for each point, where another point in that radius has
+          a significantly stronger corner. Then the points we use are the ones
+          with the largest radius. This way we ensure a more even spread of
+          points, and more points on weaker areas, less points on stronger
+          areas. This helps with computing homography, as more points on weaker
+          areas helps average out a good homography and makes it less sensitive
+          to noise.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/im1ANMS80.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Im1 with 80 Points</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/im2ANMS80.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Im2 with 80 Points</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <h3>Keypoint Matching</h3>
+        <p>
+          Now that we have our interest points on both images, we need a way to
+          figure out correspondances. In other words, which pairs of points are
+          on the same location on each image? To do this we first need a way to
+          compare the area that the point is on. We can use a 8x8 descriptor
+          sampled from a 40x40 box around each point. It is important each point
+          is only sampled once to avoid aliasing. Another way to think about
+          this process is that we are convolving an area with a mask, where the
+          stride is the size of the mask. In this case we are convlving a 40x40
+          area with a 5x5 mask, with stride 5. This gives a blurred image that
+          approximates the area around the point. Given two of these descriptors
+          we can check how similar they are and decide if they are describing
+          the same point.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/descriptors.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Descriptors</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>
+          We can push the points of one image through a nearest-neighbor model
+          and then find the nearest-neighbor of the points of the second
+          picture. Here we use the Lowes rule to find points which have a fit
+          that is much better than the rest. The ratio I used is 0.75, meaning
+          the ratio of nn1/nn2 is less than 0.75. Using a higher ratio of 0.85
+          gave me mostly true positive values, although there were still a few
+          false positives, but made alignment worse later on. Looking at their
+          descriptors we can see why the model may have thought these points
+          were similar.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/descriptorsTruePositive.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>True Positive</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/descriptorsFalsePositive.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>False Positive</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>We can now match the points, giving us this result.</p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/keypoints0_75Lowes.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Lowes Ratio of 0.75</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/keypoints0_85Lowes.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Lowes Ratio of 0.85</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>
+          Another filtering step is done to both elimate outliers seen in the
+          image above. This is done by RANSAC, where 4 points are randomly
+          selected, their homography is calculated, and applied to the other
+          points. If the resulting point is within a certain distance of the
+          actual point (in this case I used 1 pixle), then it is an inlier,
+          otherwise it is an outlier. After repreating this process a number of
+          times, or until a certain percentage of points become inliers, we
+          stop, and calculate the overall homography of all inliers. This
+          elimates a few points and gives us the following result.
+        </p>
+
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/afterRANSAC_1Tol.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>RANSAC Tolerance of 1</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>
+          Finally, we take the homography and build the panoramic the same way
+          as in the manual method.
+        </p>
+
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-8 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/auto_80Pts_0.7ratio_2tol_.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Auto Point Selection</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-8 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im1/manual.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Manual Point Selection</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>
+          In the next image, manual selection did not have the x-coord blending
+          done, but besides that you can see the results are almost the same.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im2/im1ANMS80.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>AMNS</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im2/keypoints0_75Lowes.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Keypoint Matching</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im2/afterRANSAC_2Tol.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>RANSAC</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-8 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im2/auto_200Pts_0.75ratio_2tol_.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Auto Point Selection</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-8 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im2/manual.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Manual Point Selection</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <p>
+          Finally, the auto panoramic process does quite well in the tree image.
+          This is suprising as most of the image is featureless grass, and I had
+          a hard time manually defining points.
+        </p>
+        <article class="item">
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im3/im1ANMS80.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>AMNS</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im3/keypoints0_75Lowes.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Keypoint Matching</h3>
+                </header>
+              </article>
+            </div>
+            <div class="col-5 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im3/afterRANSAC_2Tol.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>RANSAC</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-8 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im3/auto_200Pts_0.75ratio_2tol_.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Auto Point Selection</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+          <div class="row" style="justify-content: center">
+            <div class="col-8 col-12-mobile">
+              <article class="item">
+                <a href="#" class="image fit"
+                  ><img
+                    src="../project4Images/resultsPt2/im3/manual.jpg"
+                    alt=""
+                /></a>
+                <header>
+                  <h3>Manual Point Selection</h3>
+                </header>
+              </article>
+            </div>
+          </div>
+        </article>
       </section>
-    </div>
-    <!-- Footer -->
-    <div style="margin-left: 0" id="footer">
-      <!-- Copyright -->
-      <ul class="copyright">
-        <li>&copy; Untitled. All rights reserved.</li>
-        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-      </ul>
     </div>
     <!-- Scripts -->
     <script src="../assets/js/jquery.min.js"></script>
